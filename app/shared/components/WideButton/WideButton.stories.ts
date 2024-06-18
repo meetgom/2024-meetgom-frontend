@@ -27,8 +27,8 @@ export const Default: Story = {
 
 export const WithBackgroundColor: Story = {
   args: {
-    backgroundColor: '#ff6666',
-    fontColor: '#ffffff',
+    backgroundColor: 'bg-red-500',
+    fontColor: 'text-white',
     label: 'Red WideButton',
   },
 }
