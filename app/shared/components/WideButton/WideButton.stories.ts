@@ -13,7 +13,7 @@ const meta = {
     backgroundColor: { control: 'color' },
     fontColor: { control: 'color' },
   },
-  args: { onClick: fn() },
+  // args: { onClick: fn() },
 } satisfies Meta<typeof WideButton>
 
 export default meta
@@ -22,6 +22,9 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     label: 'WideButton',
+    onClick: () => {
+      alert('Co-Pilot is GOD!')
+    },
   },
 }
 
@@ -30,5 +33,8 @@ export const WithBackgroundColor: Story = {
     backgroundColor: 'bg-red-500',
     fontColor: 'text-white',
     label: 'Red WideButton',
+    onClick: () => {
+      alert('Co-Pilot is GOD!')
+    },
   },
 }

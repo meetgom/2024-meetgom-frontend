@@ -1,5 +1,4 @@
 import React from 'react'
-import './WideButton.css'
 
 interface WideButtonProps {
   backgroundColor?: string
@@ -18,7 +17,7 @@ export const WideButton = ({
   return (
     <button
       type="button"
-      className={`wide-button ${backgroundColor} ${fontColor} py-2 px-4 rounded`}
+      className={`wide-button ${backgroundColor} ${fontColor} font-nunito-sans font-semibold rounded-full cursor-pointer inline-block leading-none py-4 px-8`}
       onClick={onClick}
       {...props}
     >
