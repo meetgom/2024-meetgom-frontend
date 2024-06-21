@@ -3,7 +3,7 @@ import { fn } from '@storybook/test'
 import { WideButton } from './WideButton'
 
 const meta = {
-  title: 'Example/WideButton',
+  title: 'Shared/WideButton',
   component: WideButton,
   parameters: {
     layout: 'centered',

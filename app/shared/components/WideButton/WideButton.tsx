@@ -17,7 +17,7 @@ export const WideButton = ({
   return (
     <button
       type="button"
-      className={`wide-button ${backgroundColor} ${fontColor} font-nunito-sans font-semibold rounded-full cursor-pointer inline-block leading-none py-4 px-8`}
+      className={`wide-button ${backgroundColor} ${fontColor} font-nunito-sans font-semibold rounded-lg cursor-pointer inline-block leading-none py-4 px-8`}
       onClick={onClick}
       {...props}
     >
