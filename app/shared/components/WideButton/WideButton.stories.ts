@@ -21,7 +21,20 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    label: 'WideButton',
+    backgroundColor: 'bg-black',
+    fontColor: 'text-white',
+    label: '로그인',
+    onClick: () => {
+      alert('Co-Pilot is GOD!')
+    },
+  },
+}
+
+export const Next: Story = {
+  args: {
+    backgroundColor: 'bg-black',
+    fontColor: 'text-white',
+    label: '다음',
     onClick: () => {
       alert('Co-Pilot is GOD!')
     },
@@ -30,9 +43,9 @@ export const Default: Story = {
 
 export const WithBackgroundColor: Story = {
   args: {
-    backgroundColor: 'bg-red-500',
+    backgroundColor: 'bg-[#0085FF]',
     fontColor: 'text-white',
-    label: 'Red WideButton',
+    label: '파란색 버튼',
     onClick: () => {
       alert('Co-Pilot is GOD!')
     },
