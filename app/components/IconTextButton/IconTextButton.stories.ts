@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    icon: '/carete_event.svg',
+    icon: '/create_event.svg',
     alt: 'create event icon',
     title: '빠르게 만들기',
     label: '로그인없이 이벤트 링크 또는 코드로 일정을 생성하고 관리하세요.',
