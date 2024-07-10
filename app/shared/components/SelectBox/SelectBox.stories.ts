@@ -12,6 +12,7 @@ const meta = {
         title: { control: 'text' },
         placeholder: { control: 'text' },
         options: { control: 'object' },
+        enableSearch: { control: 'boolean' },
         onChange: { control: 'text' },
     },
 } satisfies Meta<typeof SelectBox>
@@ -24,6 +25,19 @@ export const Default: Story = {
         title: '유형',
         placeholder: '선택하세요',
         options: ['요일만 선택', '날짜 지정'],
+        enableSearch: false,
+        onChange: (e) => {
+            console.log(e.target.value)
+        },
+    },
+}
+
+export const WithSearch: Story = {
+    args: {
+        title: '유형',
+        placeholder: '선택하세요',
+        options: ['Asia/Tokyo', 'Asia/Tomsk', 'Asia/Tehran', 'Asia/Tbilisi', 'Asia/Tashkent', 'Asia/Taipei', 'Asia/Sydney', 'Asia/Srednekolymsk', 'Asia/Singapore', 'Asia/Seoul'],
+        enableSearch: true,
         onChange: (e) => {
             console.log(e.target.value)
         },
