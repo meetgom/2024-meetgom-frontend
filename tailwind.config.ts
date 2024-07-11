@@ -16,6 +16,11 @@ const config: Config = {
       fontFamily: {
         Pretendard: ['Pretendard'],
       },
+      colors: {
+        green: '#00C27C',
+        icon: '#BFBFBF',
+        stroke: '#EFEFEF',
+      },
     },
   },
   plugins: [],
