@@ -83,7 +83,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
       days.push(
         <div
           key={currentDate.toString()}
-          className={`flex justify-center cursor-pointer p-2 ${isSelected ? 'bg-[#00C27C] bg-opacity-10 text-[#00C27C] rounded-lg' : isCurrentMonth ? 'bg-white text-black' : 'bg-white text-gray-400'}`}
+          className={`flex justify-center cursor-pointer p-2 ${isSelected ? 'bg-green bg-opacity-10 text-green rounded-lg' : isCurrentMonth ? 'bg-white text-black' : 'bg-white text-gray-400'}`}
           onClick={() => handleDayClick(currentDate)}
         >
           {format(currentDate, 'd')}
