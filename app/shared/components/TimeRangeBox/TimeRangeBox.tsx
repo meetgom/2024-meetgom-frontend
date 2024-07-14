@@ -49,6 +49,7 @@ export const TimeRangeBox = ({
 
   return (
     <div>
+      <div className="text-sm text-[#959595] mb-1 ml-2">{title}</div>
       <button
         className="px-4 py-2  w-80 h-12 rounded border border-[#EFEFEF] rounded-md px-3"
         onClick={() => setShowModal(true)}
