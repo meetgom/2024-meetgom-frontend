@@ -139,15 +139,33 @@ export const TimeRangeBox = ({
               borderColor="border-black"
               label="확인"
               onClick={() => {
-                setIsDropdownVisible(false)
-                setStartHour(tempStartHour)
-                setStartMinute(tempStartMinute)
-                setEndHour(tempEndHour)
-                setEndMinute(tempEndMinute)
-                onChange(
-                  `${tempStartHour}:${tempStartMinute}`,
-                  `${tempEndHour}:${tempEndMinute}`
-                )
+                const start = new Date()
+                start.setHours(parseInt(tempStartHour))
+                start.setMinutes(parseInt(tempStartMinute))
+
+                const end = new Date()
+                end.setHours(parseInt(tempEndHour))
+                end.setMinutes(parseInt(tempEndMinute))
+
+                const diff = (end.getTime() - start.getTime()) / 60000
+
+                if (diff < 0) {
+                  alert('종료 시간이 시작 시간보다 빠릅니다.')
+                } else if (diff < 30) {
+                  alert(
+                    '시작 시간과 종료 시간의 차이는 30분 이상이어야 합니다.'
+                  )
+                } else {
+                  setIsDropdownVisible(false)
+                  setStartHour(tempStartHour)
+                  setStartMinute(tempStartMinute)
+                  setEndHour(tempEndHour)
+                  setEndMinute(tempEndMinute)
+                  onChange(
+                    `${tempStartHour}:${tempStartMinute}`,
+                    `${tempEndHour}:${tempEndMinute}`
+                  )
+                }
               }}
             />
           </div>
