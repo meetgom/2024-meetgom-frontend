@@ -1,18 +1,36 @@
-import React from 'react'
+import { Alert } from '@/app/shared/components/Alert/Alert'
+import { Button } from '@/app/shared/components/Button/Button'
+import { TitleBadge } from '@/app/shared/components/TitleBadge/TitleBadge'
+import React, { useState } from 'react'
 
 interface LinkBoxProps {
-  title: string
-  icon?: string
+  linkUrl: string
 }
 
-export const LinkBox: React.FC<LinkBoxProps> = ({
-  title,
-  icon = '/follow_the_signs.svg',
-}) => {
+export const LinkBox: React.FC<LinkBoxProps> = ({ linkUrl }) => {
+  const [alertVisible, setAlertVisible] = useState(false)
+
+  const showAlert = () => {
+    setAlertVisible(true)
+    setTimeout(() => {
+      setAlertVisible(false)
+    }, 2000)
+  }
+
   return (
-    <div className="flex items-center p-4 h-12 bg-black rounded-lg">
-      <img className="mr-2" src={icon} alt="check icon" />
-      <div className="font-Pretendard text-white">{title}</div>
+    <div className="flex justify-between px-4 py-3 items-center w-[680px] h-20 bg-[#F9F9F9] shadow-inner rounded-md">
+      <div>
+        <TitleBadge title="참가 링크" icon="/follow_the_signs.svg" />
+        <div className="font-Pretendard font-bold">{linkUrl}</div>
+      </div>
+      <Button
+        backgroundColor="bg-white"
+        fontColor="text-black"
+        borderColor="border-[#EFEFEF]"
+        label="복사"
+        onClick={showAlert}
+      />
+      <Alert visible={alertVisible} message="링크가 복사되었습니다." />
     </div>
   )
 }

@@ -9,8 +9,7 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
-    title: { control: 'text' },
-    icon: { control: 'text' },
+    linkUrl: { control: 'text' },
   },
 } satisfies Meta<typeof LinkBox>
 
@@ -19,7 +18,6 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    title: 'Title Badge',
-    icon: '/follow_the_signs.svg',
+    linkUrl: 'standardmeet.me/sda23s4dasd412tfd',
   },
 }
