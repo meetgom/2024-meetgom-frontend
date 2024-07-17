@@ -18,10 +18,10 @@ export const LinkBox: React.FC<LinkBoxProps> = ({ linkUrl }) => {
   }
 
   return (
-    <div className="flex justify-between px-4 py-3 items-center w-[680px] h-20 bg-[#F9F9F9] shadow-inner rounded-md">
+    <div className="flex justify-between px-4 py-3 items-center w-[680px] h-20 bg-[#F9F9F9] rounded-md">
       <div>
         <TitleBadge title="참가 링크" icon="/follow_the_signs.svg" />
-        <div className="font-Pretendard font-bold">{linkUrl}</div>
+        <div className=" font-bold mt-2">{linkUrl}</div>
       </div>
       <Button
         backgroundColor="bg-white"

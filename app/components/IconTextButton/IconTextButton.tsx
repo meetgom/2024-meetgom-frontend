@@ -23,10 +23,8 @@ export const IconTextButton = ({
       {...props}
     >
       <Image src={icon} alt={alt} width={40} height={40} />
-      <div className="font-Pretendard font-bold text-2xl mt-4">{title}</div>
-      <div className="font-Pretendard text-base text-[#959595] text-left">
-        {label}
-      </div>
+      <div className="font-bold text-2xl mt-4">{title}</div>
+      <div className="text-base text-[#959595] text-left">{label}</div>
     </button>
   )
 }

@@ -20,7 +20,7 @@ export const Alert: React.FC<AlertProps> = ({
       }`}
     >
       <img className="mr-2" src={icon} alt="check icon" />
-      <div className="font-Pretendard text-white">{message}</div>
+      <div className="text-white">{message}</div>
     </div>
   )
 }
