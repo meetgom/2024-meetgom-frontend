@@ -112,7 +112,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         <div className="relative">
           <input
             type="text"
-            className="bg-white text-black border border-[#EFEFEF] placeholder:text-black focus:outline-black font-Pretendard font-semibold rounded-md inline-block leading-none w-full h-12 p-3 pr-10"
+            className="bg-white text-black border border-[#EFEFEF] placeholder:text-black focus:outline-black font-semibold rounded-md inline-block leading-none w-full h-12 p-3 pr-10"
             placeholder={placeholder}
             readOnly
             value={
