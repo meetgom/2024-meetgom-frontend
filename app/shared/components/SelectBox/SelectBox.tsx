@@ -49,7 +49,7 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
     <div className="relative w-80">
       <div className="text-sm text-[#959595] mb-1 ml-2">{title}</div>
       <div
-        className={`bg-white text-black border border-[#EFEFEF] placeholder:text-black font-semibold rounded-md leading-none w-80 h-12 p-3 flex items-center justify-between cursor-pointer focus-within:outline focus-within:outline-2 focus-within:outline-black`}
+        className={`bg-white text-black border border-[#EFEFEF] placeholder:text-black rounded-md leading-none w-80 h-12 p-3 flex items-center justify-between cursor-pointer focus-within:outline focus-within:outline-2 focus-within:outline-black`}
         onClick={handleSelectClick}
       >
         {selectedOption || placeholder}
@@ -63,7 +63,7 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
               placeholder="Search"
               value={searchTerm}
               onChange={handleSearchChange}
-              className="bg-white text-black border-b border-[#EFEFEF] placeholder:text-black focus:outline-none font-semibold w-full h-12 p-3 mb-2"
+              className="bg-white text-black border-b border-[#EFEFEF] placeholder:text-black focus:outline-none w-full h-12 p-3 mb-2"
             />
           )}
           {filteredOptions.map((option, index) => (
