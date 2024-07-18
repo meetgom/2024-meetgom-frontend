@@ -19,6 +19,10 @@ jobs:
       - name: Install jq
         run: sudo apt-get install jq -y
 
+      - name: Remove GH_TOKEN
+        run: |
+          unset GH_TOKEN
+
       - name: Authenticate using gh CLI
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
