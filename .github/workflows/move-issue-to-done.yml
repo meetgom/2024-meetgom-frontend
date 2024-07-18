@@ -17,13 +17,14 @@ jobs:
         run: sudo apt-get install jq -y
 
       - name: Authenticate GitHub CLI
-        run: echo ${{ secrets.GH_TOKEN }} | gh auth login --with-token
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: echo $GH_TOKEN | gh auth login --with-token
 
       - name: Move related issues to Done
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          echo $GH_TOKEN | gh auth login --with-token
           issue_numbers=$(jq -r '.pull_request.body | scan("#([0-9]+)")' < "$GITHUB_EVENT_PATH")
           for issue_number in $issue_numbers; do
             # Find the project board
