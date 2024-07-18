@@ -20,6 +20,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
+          echo $GH_TOKEN | gh auth login --with-token
           issue_numbers=$(jq -r '.pull_request.body | scan("#([0-9]+)")' < "$GITHUB_EVENT_PATH")
 
           for issue_number in $issue_numbers; do
