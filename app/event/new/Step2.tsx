@@ -1,6 +1,6 @@
-import { Button } from '@/app/shared/components/Button/Button'
-import { SelectBox } from '@/app/shared/components/SelectBox/SelectBox'
-import { TimeRangeBox } from '@/app/shared/components/TimeRangeBox/TimeRangeBox'
+import { Button } from '@/components/Button/Button'
+import { SelectBox } from '@/components/SelectBox/SelectBox'
+import { TimeRangeBox } from '@/components/TimeRangeBox/TimeRangeBox'
 import React from 'react'
 
 export default function Step2() {

@@ -61,7 +61,7 @@ export const QRCodeModal: React.FC<QRCodeModalProps> = ({
           className="flex justify-center items-center bg-black text-white w-[180px] py-3 rounded-md mr-2"
         >
           <Image
-            src="/download.svg"
+            src="/images/download.svg"
             alt="download_icon"
             width={16}
             height={16}
@@ -71,7 +71,7 @@ export const QRCodeModal: React.FC<QRCodeModalProps> = ({
         </button>
         <button className="flex justify-center items-center w-[180px] py-3  bg-hover_tag rounded-md">
           <Image
-            src="/share.svg"
+            src="/images/share.svg"
             alt="share_icon"
             width={16}
             height={16}

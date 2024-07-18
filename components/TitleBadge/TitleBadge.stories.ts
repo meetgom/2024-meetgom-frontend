@@ -22,6 +22,6 @@ export const Default: Story = {
   args: {
     backgroundColor: 'bg-[#0085FF]',
     title: '참가 링크',
-    icon: '/follow_the_signs.svg',
+    icon: '/images/follow_the_signs.svg',
   },
 }
