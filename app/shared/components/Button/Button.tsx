@@ -6,6 +6,14 @@ interface ButtonProps {
   borderColor?: string
   label: string
   onClick?: () => void
+  size?: 'sm' | 'md' | 'lg'
+  icon?: string
+}
+
+const sizeClasses = {
+  sm: 'w-10 h-7 text-xs p-2 rounded',
+  md: 'w-44 h-12 px-4 py-2 rounded-md',
+  lg: 'w-80 py-4 px-8 text-base rounded-lg',
 }
 
 export const Button = ({
@@ -14,16 +22,21 @@ export const Button = ({
   borderColor = 'border-black',
   label,
   onClick,
+  size = 'sm',
+  icon = '',
   ...props
 }: ButtonProps) => {
   return (
     <button
       type="button"
-      className={`${backgroundColor} ${fontColor} border ${borderColor} text-xs font-semibold rounded inline-block leading-none w-10 h-7 p-2`}
+      className={`${backgroundColor} ${fontColor} border ${borderColor} ${sizeClasses[size]} leading-none inline-block`}
       onClick={onClick}
       {...props}
     >
-      {label}
+      <div className="flex justify-center">
+        {icon && <img className="mr-2" src={icon} alt="" />}
+        {label}
+      </div>
     </button>
   )
 }

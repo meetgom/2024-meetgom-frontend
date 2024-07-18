@@ -1,3 +1,4 @@
+import { Button } from '@/app/shared/components/Button/Button'
 import { DatePicker } from '@/app/shared/components/DatePicker/DatePicker'
 import { DaySelectBox } from '@/app/shared/components/DaySelectBox/DaySelectBox'
 import { SelectBox } from '@/app/shared/components/SelectBox/SelectBox'
@@ -52,11 +53,12 @@ export default function Step1({ onNext }: { onNext: () => void }) {
         </>
       )}
       <div className="h-12" />
-      <WideButton
+      <Button
         backgroundColor="bg-black"
         fontColor="text-white"
         label="다음"
         onClick={onNext}
+        size="lg"
       />
     </div>
   )

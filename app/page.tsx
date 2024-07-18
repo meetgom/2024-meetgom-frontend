@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { IconTextButton } from './components/IconTextButton/IconTextButton'
 import { Divider } from './shared/components/Divider/Divider'
 import { WideButton } from './shared/components/WideButton/WideButton'
+import { Button } from './shared/components/Button/Button'
 
 export default function Home() {
   return (
@@ -24,10 +25,11 @@ export default function Home() {
         label="로그인 없이 가지고 있는 링크 또는 코드로 이벤트에 참여하세요."
       />
       <Divider label="또는" />
-      <WideButton
+      <Button
         backgroundColor="bg-black"
         fontColor="text-white"
         label="로그인"
+        size="lg"
       />
     </>
   )
