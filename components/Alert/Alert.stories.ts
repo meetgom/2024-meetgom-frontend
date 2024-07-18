@@ -24,6 +24,6 @@ export const Default: Story = {
     message: '링크를 클립보드에 복사했습니다.',
     backgroundColor: 'bg-black',
     visible: true,
-    icon: '/check.svg',
+    icon: '/images/check.svg',
   },
 }

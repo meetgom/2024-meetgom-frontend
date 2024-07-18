@@ -9,7 +9,7 @@ interface IconTextButtonProps {
 }
 
 export const IconTextButton = ({
-  icon = '/carete_event.svg',
+  icon = '/images/carete_event.svg',
   alt = 'icon',
   title,
   label = 'default label',
