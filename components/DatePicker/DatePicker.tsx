@@ -13,7 +13,7 @@ import {
 } from 'date-fns'
 import { Divider } from '../Divider/Divider'
 import { Button } from '../Button/Button'
-import CalendarIcon from '../../../../public/calendar_month.svg'
+import CalendarIcon from '../../public/images/calendar_month.svg'
 import Image from 'next/image'
 
 export interface DatePickerProps {

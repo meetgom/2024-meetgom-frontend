@@ -1,6 +1,6 @@
-import { Alert } from '@/app/shared/components/Alert/Alert'
-import { Button } from '@/app/shared/components/Button/Button'
-import { TitleBadge } from '@/app/shared/components/TitleBadge/TitleBadge'
+import { Alert } from '@/components/Alert/Alert'
+import { Button } from '@/components/Button/Button'
+import { TitleBadge } from '@/components/TitleBadge/TitleBadge'
 import React, { useState } from 'react'
 
 interface LinkBoxProps {
@@ -20,7 +20,7 @@ export const LinkBox: React.FC<LinkBoxProps> = ({ linkUrl }) => {
   return (
     <div className="flex justify-between px-4 py-3 items-center w-[680px] h-20 bg-[#F9F9F9] rounded-md">
       <div>
-        <TitleBadge title="참가 링크" icon="/follow_the_signs.svg" />
+        <TitleBadge title="참가 링크" icon="/images/follow_the_signs.svg" />
         <div className=" font-bold mt-2">{linkUrl}</div>
       </div>
       <Button

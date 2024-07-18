@@ -9,7 +9,7 @@ interface TitleBadgeProps {
 export const TitleBadge: React.FC<TitleBadgeProps> = ({
   backgroundColor = 'bg-[#0085FF]',
   title,
-  icon = '/follow_the_signs.svg',
+  icon = '/images/follow_the_signs.svg',
 }) => {
   return (
     <div
