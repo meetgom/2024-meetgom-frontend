@@ -52,6 +52,10 @@ export const QRCodeModal: React.FC<QRCodeModalProps> = ({
 
   return (
     <div className="flex flex-col items-center p-9 w-[430px] h-[550px] bg-white rounded-lg">
+      {/* close modal button */}
+      <button onClick={onClose} className="absolute top-7 right-6">
+        <Image src="/close.png" alt="close_icon" width={16} height={16} />
+      </button>
       <div ref={ref} className="mb-4" />
       <div className="text-subtitle underline font-[14px]">{qrCodeData}</div>
       <div className="flex-1" />
