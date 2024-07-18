@@ -72,7 +72,7 @@ export const TimeRangeBox = ({
       </button>
       {isDropdownVisible && (
         <div className="shadow mt-2 w-80 rounded border border-[#EFEFEF] rounded-md">
-          <div className="h-40 flex justify-between px-12">
+          <div className="h-40 flex justify-between px-12 border-b border-[#EFEFEF]">
             <div className="flex">
               <div className="mr-1 overflow-y-scroll h-40 scrollbar-hide">
                 {hours.map((hour) => (
@@ -124,7 +124,6 @@ export const TimeRangeBox = ({
               </div>
             </div>
           </div>
-          <hr />
           <div className="h-12 flex items-center justify-between px-3">
             <Button
               backgroundColor="bg-white"

@@ -1,3 +1,4 @@
+import { Button } from '@/app/shared/components/Button/Button'
 import { SelectBox } from '@/app/shared/components/SelectBox/SelectBox'
 import { TimeRangeBox } from '@/app/shared/components/TimeRangeBox/TimeRangeBox'
 import { WideButton } from '@/app/shared/components/WideButton/WideButton'
@@ -27,11 +28,12 @@ export default function Step2() {
         title="유형"
       />
       <div className="h-12" />
-      <WideButton
+      <Button
         backgroundColor="bg-black"
         fontColor="text-white"
         label="이벤트 생성"
         onClick={() => {}}
+        size="lg"
       />
     </div>
   )
