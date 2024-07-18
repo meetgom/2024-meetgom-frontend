@@ -21,6 +21,7 @@
 
 # debug
 npm-debug.log*
+*.log
 
 # local env files
 .env*.local
