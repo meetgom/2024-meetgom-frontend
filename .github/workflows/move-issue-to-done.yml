@@ -22,11 +22,11 @@ jobs:
         run: sudo apt-get install jq -y
 
       - name: Authenticate using gh CLI
-        run: echo "${{ secrets.GH_TOKEN }}" | gh auth login --with-token
+        run: echo "${{ secrets.MY_GITHUB_TOKEN }}" | gh auth login --with-token
 
       - name: Move related issues to Done
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
         run: |
           issue_numbers=$(jq -r '.pull_request.body | scan("#([0-9]+)")' < "$GITHUB_EVENT_PATH")
 
@@ -41,7 +41,7 @@ jobs:
                 }
               }
             }'
-            project_id=$(curl -H "Authorization: token $GH_TOKEN" \
+            project_id=$(curl -H "Authorization: token $MY_GITHUB_TOKEN" \
                           -X POST -d "{\"query\":\"$project_query\"}" \
                           https://api.github.com/graphql | jq -r '.data.repository.projectsV2.nodes[0].id')
 
@@ -57,7 +57,7 @@ jobs:
                 }
               }
             }'
-            item_id=$(curl -H "Authorization: token $GH_TOKEN" \
+            item_id=$(curl -H "Authorization: token $MY_GITHUB_TOKEN" \
                          -X POST -d "{\"query\":\"$item_query\"}" \
                          https://api.github.com/graphql | jq -r '.data.repository.issue.projectItems.nodes[0].id')
 
@@ -75,7 +75,7 @@ jobs:
                 }
               }
             }'
-            curl -H "Authorization: token $GH_TOKEN" \
+            curl -H "Authorization: token $MY_GITHUB_TOKEN" \
                  -X POST -d "{\"query\":\"$mutation\"}" \
                  https://api.github.com/graphql
           done
