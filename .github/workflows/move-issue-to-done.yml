@@ -16,18 +16,16 @@ jobs:
       - name: Install jq
         run: sudo apt-get install jq -y
 
-      - name: Authenticate GitHub CLI
-        run: echo ${{ secrets.GH_TOKEN }} | gh auth login --with-token
-
       - name: Move related issues to Done
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           echo $GH_TOKEN | gh auth login --with-token
           issue_numbers=$(jq -r '.pull_request.body | scan("#([0-9]+)")' < "$GITHUB_EVENT_PATH")
+
           for issue_number in $issue_numbers; do
             # Find the project board
-            project_id=$(gh api graphql -f query='{
+            project_query='{
               repository(owner: "meetgom", name: "2024-meetgom-frontend") {
                 projectsV2(first: 1) {
                   nodes {
@@ -35,10 +33,13 @@ jobs:
                   }
                 }
               }
-            }' -q '.data.repository.projectsV2.nodes[0].id')
+            }'
+            project_id=$(curl -H "Authorization: token $GH_TOKEN" \
+                          -X POST -d "{\"query\":\"$project_query\"}" \
+                          https://api.github.com/graphql | jq -r '.data.repository.projectsV2.nodes[0].id')
 
             # Find the project item
-            item_id=$(gh api graphql -f query='{
+            item_query='{
               repository(owner: "meetgom", name: "2024-meetgom-frontend") {
                 issue(number: '$issue_number') {
                   projectItems(first: 1) {
@@ -48,10 +49,13 @@ jobs:
                   }
                 }
               }
-            }' -q '.data.repository.issue.projectItems.nodes[0].id')
+            }'
+            item_id=$(curl -H "Authorization: token $GH_TOKEN" \
+                         -X POST -d "{\"query\":\"$item_query\"}" \
+                         https://api.github.com/graphql | jq -r '.data.repository.issue.projectItems.nodes[0].id')
 
             # Move the project item to Done column
-            gh api graphql -f query='mutation {
+            mutation='mutation {
               updateProjectV2ItemFieldValue(input: {
                 projectId: "'$project_id'",
                 itemId: "'$item_id'",
@@ -64,4 +68,7 @@ jobs:
                 }
               }
             }'
+            curl -H "Authorization: token $GH_TOKEN" \
+                 -X POST -d "{\"query\":\"$mutation\"}" \
+                 https://api.github.com/graphql
           done
