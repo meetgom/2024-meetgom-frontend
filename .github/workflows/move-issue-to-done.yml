@@ -1,0 +1,71 @@
+name: Move Issue to Done
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  move-issue:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install jq
+        run: sudo apt-get install jq -y
+
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+          sudo apt-add-repository https://cli.github.com/packages
+          sudo apt update
+          sudo apt install gh
+
+      - name: Move related issues to Done
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          echo $GH_TOKEN | gh auth login --with-token
+          issue_numbers=$(jq -r '.pull_request.body | scan("#([0-9]+)")' < "$GITHUB_EVENT_PATH")
+          for issue_number in $issue_numbers; do
+            # Find the project board
+            project_id=$(gh api graphql -f query='{
+              repository(owner: "meetgom", name: "2024-meetgom-frontend") {
+                projectsV2(first: 1) {
+                  nodes {
+                    id
+                  }
+                }
+              }
+            }' -q '.data.repository.projectsV2.nodes[0].id')
+
+            # Find the project item
+            item_id=$(gh api graphql -f query='{
+              repository(owner: "meetgom", name: "2024-meetgom-frontend") {
+                issue(number: '$issue_number') {
+                  projectItems(first: 1) {
+                    nodes {
+                      id
+                    }
+                  }
+                }
+              }
+            }' -q '.data.repository.issue.projectItems.nodes[0].id')
+
+            # Move the project item to Done column
+            gh api graphql -f query='mutation {
+              updateProjectV2ItemFieldValue(input: {
+                projectId: "'$project_id'",
+                itemId: "'$item_id'",
+                fieldValue: {
+                  singleSelectOptionId: "98236657"
+                }
+              }) {
+                projectV2Item {
+                  id
+                }
+              }
+            }'
+          done
