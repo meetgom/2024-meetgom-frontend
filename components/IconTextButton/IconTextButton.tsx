@@ -18,7 +18,7 @@ export const IconTextButton = ({
 }: IconTextButtonProps) => {
   return (
     <button
-      className="flex flex-col w-80 border border-[#EFEFEF] rounded-lg p-6 bg-white hover:brightness-95 duration-300"
+      className="flex flex-col w-80 border border-[#EFEFEF] rounded-lg p-6 bg-white hover:shadow duration-300"
       onClick={onClick}
       {...props}
     >
