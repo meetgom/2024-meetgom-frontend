@@ -1,5 +1,3 @@
-// 요일을 선택할 수 있는 컴포넌트
-
 import { useState } from 'react'
 
 interface DaySelectBoxProps {
@@ -33,7 +31,7 @@ export const DaySelectBox: React.FC<DaySelectBoxProps> = ({
 
   return (
     <div>
-      <div className="text-sm text-[#959595] mb-1 ml-2">{title}</div>{' '}
+      <div className="text-sm text-[#959595] mb-1 ml-2">{title}</div>
       <div className="flex justify-between w-80 mx-auto">
         {weekDays.map((weekDay) => {
           const day = Object.keys(weekDay)[0]
@@ -41,7 +39,7 @@ export const DaySelectBox: React.FC<DaySelectBoxProps> = ({
           return (
             <div
               key={day}
-              className={`w-[43px] h-12 flex justify-center items-center rounded-md border border-[#EFEFEF] cursor-pointer ${
+              className={`w-[43px] h-12 flex justify-center items-center rounded-md border border-[#EFEFEF] cursor-pointer transition-colors duration-300 ease-in-out ${
                 selectedDays.includes(day)
                   ? 'bg-green bg-opacity-10 border-green border-opacity-10 text-green'
                   : 'bg-white text-icon border-stroke'
