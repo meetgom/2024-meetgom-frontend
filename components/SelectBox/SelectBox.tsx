@@ -55,28 +55,28 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
         {selectedOption || placeholder}
         <span className="ml-2">&#9662;</span>
       </div>
-      {isDropdownVisible && (
-        <div className="absolute top-full left-0 right-0 bg-white border border-[#EFEFEF] rounded-md mt-1 max-h-60 overflow-auto z-10">
-          {enableSearch && (
-            <input
-              type="text"
-              placeholder="Search"
-              value={searchTerm}
-              onChange={handleSearchChange}
-              className="bg-white text-black border-b border-[#EFEFEF] placeholder:text-black focus:outline-none w-full h-12 p-3 mb-2"
-            />
-          )}
-          {filteredOptions.map((option, index) => (
-            <div
-              key={index}
-              className="p-2 cursor-pointer hover:bg-gray-100"
-              onClick={() => handleOptionClick(option)}
-            >
-              {option}
-            </div>
-          ))}
-        </div>
-      )}
+      <div
+        className={`absolute top-full left-0 right-0 bg-white border border-[#EFEFEF] rounded-md mt-1 z-10 transition-opacity duration-300 ease-in-out ${isDropdownVisible ? 'opacity-100 max-h-60' : 'opacity-0 max-h-0'} overflow-auto`}
+      >
+        {enableSearch && (
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className="bg-white text-black border-b border-[#EFEFEF] placeholder:text-black focus:outline-none w-full h-12 p-3 mb-2"
+          />
+        )}
+        {filteredOptions.map((option, index) => (
+          <div
+            key={index}
+            className="p-2 cursor-pointer hover:bg-gray-100"
+            onClick={() => handleOptionClick(option)}
+          >
+            {option}
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

@@ -5,7 +5,7 @@ const meta = {
   title: 'Shared/Alert',
   component: Alert,
   parameters: {
-    layout: 'centered',
+    // layout: 'centered',
   },
   tags: ['autodocs'],
   argTypes: {
