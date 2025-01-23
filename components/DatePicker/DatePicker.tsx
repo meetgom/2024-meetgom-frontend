@@ -80,10 +80,19 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           isBefore(currentDate, tempDates.endDate))
       const isCurrentMonth = isSameMonth(currentDate, startMonth)
 
+      const isFirstDay =
+        tempDates.startDate && isEqual(currentDate, tempDates.startDate)
+      const isLastDay =
+        tempDates.endDate && isEqual(currentDate, tempDates.endDate)
+      const isSingleSelectedDay =
+        tempDates.startDate &&
+        !tempDates.endDate &&
+        isEqual(currentDate, tempDates.startDate)
+
       days.push(
         <div
           key={currentDate.toString()}
-          className={`flex justify-center cursor-pointer p-2 ${isSelected ? 'bg-green bg-opacity-10 text-green rounded-lg' : isCurrentMonth ? 'bg-white text-black' : 'bg-white text-gray-400'}`}
+          className={`flex justify-center cursor-pointer px-1 py-3 text-sm ${isSelected ? 'bg-blue text-white' : isCurrentMonth ? 'bg-white text-black' : 'bg-white text-gray-400'} ${isFirstDay ? 'rounded-l-md' : ''} ${isLastDay ? 'rounded-r-md' : ''} ${isSingleSelectedDay ? 'rounded-md' : ''}`}
           onClick={() => handleDayClick(currentDate)}
         >
           {format(currentDate, 'd')}
@@ -132,7 +141,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           />
         </div>
         {isCalendarOpen && (
-          <div className="absolute bg-white border rounded-md shadow-lg mt-1 w-full z-10">
+          <div className="relative bg-white rounded-md shadow-lg mt-1 w-full">
             <div className="flex justify-between px-2 pt-2">
               <button
                 onClick={() =>
@@ -163,7 +172,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
               </button>
             </div>
             <Divider />
-            <div className="grid grid-cols-7 gap-1 p-2">
+            <div className="grid grid-cols-7 gap-y-1 p-2">
               {weekDays.map((day) => (
                 <div key={day} className="text-center text-sm">
                   {day}
