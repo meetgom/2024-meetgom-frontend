@@ -33,7 +33,7 @@ export const Button = ({
       onClick={onClick}
       {...props}
     >
-      <div className="flex justify-center">
+      <div className="flex justify-center whitespace-nowrap">
         {icon && <img className="mr-2" src={icon} alt="" />}
         {label}
       </div>
