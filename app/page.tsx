@@ -1,35 +1,28 @@
 'use client'
 
 import Link from 'next/link'
-import { IconTextButton } from '../components/IconTextButton/IconTextButton'
 import { Button } from '../components/Button/Button'
-import { Divider } from '../components/Divider/Divider'
 
 export default function Home() {
   return (
     <>
+      <p className="text-4xl font-medium">
+        이벤트를 가장 쉽고 빠르게 관리하는 방법
+      </p>
+
+      <p className="text-lg text-subtitle text-center">
+        밋곰에서 이벤트를 만들고 참여자들에게 공유하세요. <br />
+        다양한 시간대를 이용하는 참여자 관리가 더욱 쉬워집니다.
+      </p>
+
       <Link href="/event/new">
-        <IconTextButton
-          icon="/images/create_event.svg"
-          alt="icon"
-          title="빠르게 만들기"
-          label="로그인없이 이벤트 링크 또는 코드로 일정을 생성하고 관리하세요."
+        <Button
+          backgroundColor="bg-black"
+          fontColor="text-white"
+          label="지금 이벤트 만들기"
+          size="md"
         />
       </Link>
-
-      <IconTextButton
-        icon="/images/join_with_code.svg"
-        alt="join event icon"
-        title="코드로 참여하기"
-        label="로그인 없이 가지고 있는 링크 또는 코드로 이벤트에 참여하세요."
-      />
-      <Divider label="또는" />
-      <Button
-        backgroundColor="bg-black"
-        fontColor="text-white"
-        label="로그인"
-        size="lg"
-      />
     </>
   )
 }
