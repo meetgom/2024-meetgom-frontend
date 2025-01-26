@@ -41,7 +41,7 @@ export const DaySelectBox: React.FC<DaySelectBoxProps> = ({
               key={day}
               className={`w-[43px] h-12 flex justify-center items-center rounded-md border border-[#EFEFEF] cursor-pointer transition-colors duration-300 ease-in-out ${
                 selectedDays.includes(day)
-                  ? 'bg-green bg-opacity-10 border-green border-opacity-10 text-green'
+                  ? 'bg-blue border-opacity-10 text-white'
                   : 'bg-white text-icon border-stroke'
               }`}
               onClick={() => handleDayClick(day)}
