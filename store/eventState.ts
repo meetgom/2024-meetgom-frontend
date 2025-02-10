@@ -12,6 +12,7 @@ export interface EventState {
   startTime: Time | null
   endTime: Time | null
   timeZone: string
+  pincode: string | null
 }
 
 export const eventState = atom<EventState>({
@@ -24,5 +25,6 @@ export const eventState = atom<EventState>({
     startTime: { hours: 9, minutes: 30 },
     endTime: { hours: 22, minutes: 30 },
     timeZone: 'Asia/Tokyo',
+    pincode: null,
   },
 })
