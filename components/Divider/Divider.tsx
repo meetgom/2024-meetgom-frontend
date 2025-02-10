@@ -11,7 +11,7 @@ export const Divider = ({ label }: DividerProps) => {
 
     <div className="flex items-center justify-between my-4">
       <hr className="border-t border-[#EFEFEF] flex-grow" />
-      {label && <span className="text-[#959595] mx-4">{label}</span>}
+      {label && <span className="text-subtitle mx-4">{label}</span>}
       <hr className="border-t border-[#EFEFEF] flex-grow" />
     </div>
   )

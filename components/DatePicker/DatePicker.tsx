@@ -16,10 +16,21 @@ import { Button } from '../Button/Button'
 import CalendarIcon from '../../public/images/calendar_month.svg'
 import Image from 'next/image'
 
+interface DateRange {
+  startDate: Date | null
+  endDate: Date | null
+}
+
+interface Calendar {
+  year: number
+  month: number
+}
+
 export interface DatePickerProps {
   title: string
   placeholder: string
-  onChange: (dates: { startDate: Date | null; endDate: Date | null }) => void
+  defaultValue?: DateRange
+  onChange: (dates: DateRange) => void
 }
 
 const weekDays = ['일', '월', '화', '수', '목', '금', '토']
@@ -27,26 +38,22 @@ const weekDays = ['일', '월', '화', '수', '목', '금', '토']
 export const DatePicker: React.FC<DatePickerProps> = ({
   title,
   placeholder,
+  defaultValue,
   onChange,
 }) => {
-  const [calendar, setCalendar] = useState<{ year: number; month: number }>({
+  const [calendar, setCalendar] = useState<Calendar>({
     year: new Date().getFullYear(),
     month: new Date().getMonth() + 1,
   })
-  const [dates, setDates] = useState<{
-    startDate: Date | null
-    endDate: Date | null
-  }>({
-    startDate: null,
-    endDate: null,
-  })
-  const [tempDates, setTempDates] = useState<{
-    startDate: Date | null
-    endDate: Date | null
-  }>({
-    startDate: null,
-    endDate: null,
-  })
+
+  const [dates, setDates] = useState<DateRange>(
+    defaultValue ?? {
+      startDate: null,
+      endDate: null,
+    }
+  )
+
+  const [tempDates, setTempDates] = useState<DateRange>(dates)
   const [isCalendarOpen, setIsCalendarOpen] = useState(false)
 
   const handleDayClick = (day: Date) => {
@@ -54,11 +61,29 @@ export const DatePicker: React.FC<DatePickerProps> = ({
       if (isAfter(day, tempDates.startDate)) {
         setTempDates({ startDate: tempDates.startDate, endDate: day })
       } else {
-        setTempDates({ startDate: day, endDate: tempDates.endDate })
+        setTempDates({ startDate: day, endDate: null })
       }
     } else {
       setTempDates({ startDate: day, endDate: null })
     }
+  }
+
+  const handlePrevMonth = () => {
+    setCalendar((prev) => {
+      if (prev.month === 1) {
+        return { year: prev.year - 1, month: 12 }
+      }
+      return { ...prev, month: prev.month - 1 }
+    })
+  }
+
+  const handleNextMonth = () => {
+    setCalendar((prev) => {
+      if (prev.month === 12) {
+        return { year: prev.year + 1, month: 1 }
+      }
+      return { ...prev, month: prev.month + 1 }
+    })
   }
 
   const renderDays = () => {
@@ -80,19 +105,16 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           isBefore(currentDate, tempDates.endDate))
       const isCurrentMonth = isSameMonth(currentDate, startMonth)
 
-      const isFirstDay =
-        tempDates.startDate && isEqual(currentDate, tempDates.startDate)
-      const isLastDay =
-        tempDates.endDate && isEqual(currentDate, tempDates.endDate)
-      const isSingleSelectedDay =
-        tempDates.startDate &&
-        !tempDates.endDate &&
-        isEqual(currentDate, tempDates.startDate)
-
       days.push(
         <div
           key={currentDate.toString()}
-          className={`flex justify-center cursor-pointer px-1 py-3 text-sm ${isSelected ? 'bg-blue text-white' : isCurrentMonth ? 'bg-white text-black' : 'bg-white text-gray-400'} ${isFirstDay ? 'rounded-l-md' : ''} ${isLastDay ? 'rounded-r-md' : ''} ${isSingleSelectedDay ? 'rounded-md' : ''}`}
+          className={`flex justify-center cursor-pointer p-2 ${
+            isSelected
+              ? 'bg-green bg-opacity-10 text-green rounded-lg'
+              : isCurrentMonth
+                ? 'bg-white text-black'
+                : 'bg-white text-gray-400'
+          }`}
           onClick={() => handleDayClick(currentDate)}
         >
           {format(currentDate, 'd')}
@@ -103,15 +125,40 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     return days
   }
 
+  const getDisplayValue = () => {
+    if (dates.startDate && dates.endDate) {
+      return `${format(dates.startDate, 'yyyy/MM/dd')} - ${format(
+        dates.endDate,
+        'yyyy/MM/dd'
+      )}`
+    }
+    if (dates.startDate) {
+      return format(dates.startDate, 'yyyy/MM/dd')
+    }
+    return ''
+  }
+
   const handleCancel = () => {
     setTempDates(dates)
     setIsCalendarOpen(false)
   }
 
   const handleConfirm = () => {
-    setDates(tempDates)
-    onChange(tempDates)
+    if (
+      (tempDates.startDate && tempDates.endDate) ||
+      (!tempDates.startDate && !tempDates.endDate)
+    ) {
+      setDates(tempDates)
+      onChange(tempDates)
+    }
     setIsCalendarOpen(false)
+  }
+
+  const toggleCalendar = () => {
+    setIsCalendarOpen(!isCalendarOpen)
+    if (!isCalendarOpen) {
+      setTempDates(dates)
+    }
   }
 
   return (
@@ -121,58 +168,34 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         <div className="relative">
           <input
             type="text"
-            className="bg-white text-black border border-[#EFEFEF] placeholder:text-black focus:outline-black rounded-md inline-block leading-none w-full h-12 p-3 pr-10"
+            className="bg-white text-black border border-[#EFEFEF] placeholder:text-black focus:outline-black rounded-md inline-block leading-none w-full h-12 p-3 pr-10 cursor-pointer"
             placeholder={placeholder}
             readOnly
-            value={
-              dates.startDate && dates.endDate
-                ? `${format(dates.startDate, 'yyyy/MM/dd')} - ${format(dates.endDate, 'yyyy/MM/dd')}`
-                : dates.startDate
-                  ? format(dates.startDate, 'yyyy/MM/dd')
-                  : ''
-            }
-            onClick={() => setIsCalendarOpen(!isCalendarOpen)}
+            value={getDisplayValue()}
+            onClick={toggleCalendar}
           />
           <Image
             src={CalendarIcon}
             alt="calendar"
             className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
-            onClick={() => setIsCalendarOpen(!isCalendarOpen)}
+            onClick={toggleCalendar}
           />
         </div>
         {isCalendarOpen && (
-          <div className="relative bg-white rounded-md shadow-lg mt-1 w-full">
+          <div className="absolute bg-white border rounded-md shadow-lg mt-1 w-full z-10">
             <div className="flex justify-between px-2 pt-2">
-              <button
-                onClick={() =>
-                  setCalendar({
-                    year: calendar.year,
-                    month: calendar.month - 1,
-                  })
-                }
-                disabled={calendar.month === 1}
-                className="text-[#959595]"
-              >
+              <button onClick={handlePrevMonth} className="text-[#959595]">
                 ＜
               </button>
               <div className="flex items-end font-semibold text-sm">
                 {calendar.year}년 {calendar.month}월
               </div>
-              <button
-                onClick={() =>
-                  setCalendar({
-                    year: calendar.year,
-                    month: calendar.month + 1,
-                  })
-                }
-                disabled={calendar.month === 12}
-                className="text-[#959595]"
-              >
+              <button onClick={handleNextMonth} className="text-[#959595]">
                 ＞
               </button>
             </div>
             <Divider />
-            <div className="grid grid-cols-7 gap-y-1 p-2">
+            <div className="grid grid-cols-7 gap-1 p-2">
               {weekDays.map((day) => (
                 <div key={day} className="text-center text-sm">
                   {day}
