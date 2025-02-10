@@ -68,7 +68,7 @@ export const useEventSheetQuery = (eventSheetCode: string, region: string) => {
 }
 
 // 기본 이벤트 시트 생성 쿼리 훅
-const useCreateEventSheetMutation = () => {
+export const useCreateEventSheetMutation = () => {
   return useMutation({
     mutationKey: ['eventSheet'],
     mutationFn: (eventSheet: BasicEventSheet) => createEventSheet(eventSheet),
@@ -84,7 +84,7 @@ const useCreateEventSheetMutation = () => {
 }
 
 // 특정 날짜 기반 이벤트 생성 쿼리 훅
-const useSpecificDateEventSheetMutation = () => {
+export const useSpecificDateEventSheetMutation = () => {
   return useMutation({
     mutationKey: ['specificDateEventSheet'],
     mutationFn: (eventSheet: SpecificDateEventSheet) =>
@@ -101,7 +101,7 @@ const useSpecificDateEventSheetMutation = () => {
 }
 
 // 요일 기반 이벤트 생성 쿼리 훅
-const useRecurringWeekdaysEventSheetMutation = () => {
+export const useRecurringWeekdaysEventSheetMutation = () => {
   return useMutation({
     mutationKey: ['recurringWeekdaysEventSheet'],
     mutationFn: (eventSheet: RecurringWeekdaysEventSheet) =>
