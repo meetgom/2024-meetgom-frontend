@@ -64,7 +64,7 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
             placeholder="Search"
             value={searchTerm}
             onChange={handleSearchChange}
-            className="bg-white text-black border-b border-[#EFEFEF] placeholder:text-black focus:outline-none w-full h-12 p-3 mb-2"
+            className="bg-white text-black border-b border-[#EFEFEF] placeholder:text-black focus:outline-hidden w-full h-12 p-3 mb-2"
           />
         )}
         {filteredOptions.map((option, index) => (

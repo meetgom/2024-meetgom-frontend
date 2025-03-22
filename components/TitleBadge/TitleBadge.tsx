@@ -13,7 +13,7 @@ export const TitleBadge: React.FC<TitleBadgeProps> = ({
 }) => {
   return (
     <div
-      className={`flex justify-between items-center w-20 h-7 p-1 px-2 ${backgroundColor} rounded`}
+      className={`flex justify-between items-center w-20 h-7 p-1 px-2 ${backgroundColor} rounded-sm`}
     >
       <img className="" src={icon} alt="check icon" />
       <div className="text-white text-sm font-bold">{title}</div>
