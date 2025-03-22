@@ -43,7 +43,7 @@ const PinInput = ({
           <div
             key={index}
             className={`w-12 h-12 rounded-lg flex items-center justify-center text-2xl 
-              ${index === activeIndex ? 'border-2 border-blue drop-shadow' : 'border border-neutral-200'} 
+              ${index === activeIndex ? 'border-2 border-blue drop-shadow-sm' : 'border border-neutral-200'} 
               `}
           >
             {index < pinCode.length - 1 ? (

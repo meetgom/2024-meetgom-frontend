@@ -10,9 +10,9 @@ export const Divider = ({ label }: DividerProps) => {
     // 가장 바깥쪽 div는 스토리북에서 컴포넌트를 렌더링할 때 필요한 요소
 
     <div className="flex items-center justify-between my-4">
-      <hr className="border-t border-[#EFEFEF] flex-grow" />
+      <hr className="border-t border-[#EFEFEF] grow" />
       {label && <span className="text-subtitle mx-4">{label}</span>}
-      <hr className="border-t border-[#EFEFEF] flex-grow" />
+      <hr className="border-t border-[#EFEFEF] grow" />
     </div>
   )
 }
