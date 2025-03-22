@@ -25,8 +25,7 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
     setIsDropdownVisible(!isDropdownVisible)
   }
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const term = event.target.value
+  const handleSearchChange = (term: string) => {
     setSearchTerm(term)
     if (term.trim() === '') {
       setFilteredOptions(options)
@@ -63,7 +62,7 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
             type="text"
             placeholder="Search"
             value={searchTerm}
-            onChange={handleSearchChange}
+            onChange={(event) => handleSearchChange(event.target.value)}
             className="bg-white text-black border-b border-[#EFEFEF] placeholder:text-black focus:outline-hidden w-full h-12 p-3 mb-2"
           />
         )}
