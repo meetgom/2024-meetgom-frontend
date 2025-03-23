@@ -3,7 +3,7 @@ import { RecurringWeekdaysEventSheet } from '@/types/eventSheet'
 import { useMutation } from '@tanstack/react-query'
 
 /** 요일 기반 이벤트 생성 쿼리 훅 */
-const useRecurringWeekdaysEventSheetMutation = () => {
+export const useRecurringWeekdaysEventSheetMutation = () => {
   return useMutation({
     mutationKey: ['recurringWeekdaysEventSheet'],
     mutationFn: (eventSheet: RecurringWeekdaysEventSheet) =>
