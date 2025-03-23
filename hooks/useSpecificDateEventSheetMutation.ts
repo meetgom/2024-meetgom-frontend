@@ -3,7 +3,7 @@ import { SpecificDateEventSheet } from '@/types/eventSheet'
 import { useMutation } from '@tanstack/react-query'
 
 /** 특정 날짜 기반 이벤트 생성 쿼리 훅 */
-const useSpecificDateEventSheetMutation = () => {
+export const useSpecificDateEventSheetMutation = () => {
   return useMutation({
     mutationKey: ['specificDateEventSheet'],
     mutationFn: (eventSheet: SpecificDateEventSheet) =>

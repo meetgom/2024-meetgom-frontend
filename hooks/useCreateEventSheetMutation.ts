@@ -3,7 +3,7 @@ import { BasicEventSheet } from '@/types/eventSheet'
 import { useMutation } from '@tanstack/react-query'
 
 /** 기본 이벤트 시트 생성 쿼리 훅 */
-const useCreateEventSheetMutation = () => {
+export const useCreateEventSheetMutation = () => {
   return useMutation({
     mutationKey: ['eventSheet'],
     mutationFn: (eventSheet: BasicEventSheet) => createEventSheet(eventSheet),

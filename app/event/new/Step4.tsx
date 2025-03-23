@@ -1,16 +1,15 @@
 import { eventState } from '@/store/eventState'
 import { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
-import {
-  useCreateEventSheetMutation,
-  useSpecificDateEventSheetMutation,
-  useRecurringWeekdaysEventSheetMutation,
-} from '@/hooks/queries/eventSheet'
+
 import {
   BasicEventSheet,
   SpecificDateEventSheet,
   RecurringWeekdaysEventSheet,
 } from '@/types/eventSheet'
+import { useCreateEventSheetMutation } from '@/hooks/useCreateEventSheetMutation'
+import { useSpecificDateEventSheetMutation } from '@/hooks/useSpecificDateEventSheetMutation'
+import { useRecurringWeekdaysEventSheetMutation } from '@/hooks/useRecurringWeekdaysEventSheetMutation'
 
 export default function Step4({ onNext }: { onNext: () => void }) {
   const [formState] = useRecoilState(eventState)

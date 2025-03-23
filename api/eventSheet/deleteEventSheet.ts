@@ -1,20 +1,16 @@
-import { SpecificDateEventSheet } from '@/types/eventSheet'
 import { API_BASE_URL } from '@/config/api'
 import { ApiResponse } from '@/types/apiResponse'
 
-/** 특정 날짜 기반 이벤트 시트 생성 API */
-export const createSpecificDateEventSheet = async (
-  eventSheet: SpecificDateEventSheet
-) => {
+/** 이벤트 시트 삭제 API */
+export const updateEventSheet = async (eventSheetCode: string) => {
   try {
     const response = await fetch(
-      `${API_BASE_URL}/v1/event-sheet/specific-dates`,
+      `${API_BASE_URL}/v1/event-sheet/${eventSheetCode}`,
       {
-        method: 'POST',
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(eventSheet),
       }
     )
 
@@ -24,13 +20,13 @@ export const createSpecificDateEventSheet = async (
       const errorMessage =
         responseData.message ||
         responseData.error ||
-        `API 오류 (${response.status}): 특정 날짜 기반 이벤트 시트 생성 실패`
+        `API 오류 (${response.status}): 이벤트 시트 삭제 실패`
       throw new Error(errorMessage)
     }
 
     return responseData.data
   } catch (error) {
-    console.error('특정 날짜 기반 이벤트 시트 생성 중 오류 발생:', error)
+    console.error('이벤트 시트 삭제 중 오류 발생:', error)
     throw error
   }
 }
