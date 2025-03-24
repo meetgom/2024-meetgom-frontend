@@ -57,7 +57,7 @@ export const TimeRangeBox = ({
     <div className="flex flex-col">
       <div className="text-sm text-[#959595] mb-1 ml-2">{title}</div>
       <button
-        className="px-4 py-2 w-80 h-12 rounded-sm border border-[#EFEFEF] rounded-md px-3"
+        className="py-2 w-80 h-12 border border-[#EFEFEF] rounded-md px-3"
         onClick={() => handleDropdownVisibility(!isDropdownVisible)}
       >
         <div className="flex items-center justify-between">
@@ -80,7 +80,7 @@ export const TimeRangeBox = ({
                 {hours.map((hour) => (
                   <div
                     key={`start-hour-${hour}`}
-                    className={`duration-300 w-10 h-8 items-center flex justify-center px-1 rounded-sm my-1 cursor-pointer ${hour === tempStartHour ? 'text-blue bg-blue bg-opacity-10' : 'text-[#B2B2B2]'}`}
+                    className={`duration-300 w-10 h-8 items-center flex justify-center px-1 rounded-sm my-1 cursor-pointer ${hour === tempStartHour ? 'text-white bg-blue-500 bg-opacity-10' : 'text-[#B2B2B2]'}`}
                     onClick={() => setTempStartHour(hour)}
                   >
                     {hour}
@@ -92,7 +92,7 @@ export const TimeRangeBox = ({
                 {minutes.map((minute) => (
                   <div
                     key={`start-minute-${minute}`}
-                    className={`duration-300 w-10 h-8 items-center flex justify-center px-1 rounded-sm my-1 cursor-pointer ${minute === tempStartMinute ? 'text-blue bg-blue bg-opacity-10' : 'text-[#B2B2B2]'}`}
+                    className={`duration-300 w-10 h-8 items-center flex justify-center px-1 rounded-sm my-1 cursor-pointer ${minute === tempStartMinute ? 'text-white bg-blue-500 bg-opacity-10' : 'text-[#B2B2B2]'}`}
                     onClick={() => setTempStartMinute(minute)}
                   >
                     {minute}
@@ -105,7 +105,7 @@ export const TimeRangeBox = ({
                 {hours.map((hour) => (
                   <div
                     key={`end-hour-${hour}`}
-                    className={`duration-300 w-10 h-8 items-center flex justify-center px-1 rounded-sm my-1 cursor-pointer ${hour === tempEndHour ? 'text-blue bg-blue bg-opacity-10' : 'text-[#B2B2B2]'}`}
+                    className={`duration-300 w-10 h-8 items-center flex justify-center px-1 rounded-sm my-1 cursor-pointer ${hour === tempEndHour ? 'text-white bg-blue-500 bg-opacity-10' : 'text-[#B2B2B2]'}`}
                     onClick={() => setTempEndHour(hour)}
                   >
                     {hour}
@@ -117,7 +117,7 @@ export const TimeRangeBox = ({
                 {minutes.map((minute) => (
                   <div
                     key={`end-minute-${minute}`}
-                    className={`duration-300 w-10 h-8 items-center flex justify-center px-1 rounded-sm my-1 cursor-pointer ${minute === tempEndMinute ? 'text-blue bg-blue bg-opacity-10' : 'text-[#B2B2B2]'}`}
+                    className={`duration-300 w-10 h-8 items-center flex justify-center px-1 rounded-sm my-1 cursor-pointer ${minute === tempEndMinute ? 'text-white bg-blue-500 bg-opacity-10' : 'text-[#B2B2B2]'}`}
                     onClick={() => setTempEndMinute(minute)}
                   >
                     {minute}
