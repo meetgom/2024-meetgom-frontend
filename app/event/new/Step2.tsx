@@ -3,66 +3,67 @@ import { DatePicker } from '@/components/DatePicker/DatePicker'
 import { DaySelectBox } from '@/components/DaySelectBox/DaySelectBox'
 import { SelectBox } from '@/components/SelectBox/SelectBox'
 import { TimeRangeBox } from '@/components/TimeRangeBox/TimeRangeBox'
-import { eventState } from '@/store/eventState'
-import React, { useState } from 'react'
-import { useRecoilState } from 'recoil'
-import { format, parse, setHours, setMinutes } from 'date-fns'
+import React, { useEffect, useState } from 'react'
+import { format, set } from 'date-fns'
 import { timeStringToTime } from '../../../utils/timeUtils'
+import { useEventStore } from '@/store/useEventStore'
 
 export default function Step2({ onNext }: { onNext: () => void }) {
-  const [formState, setFormState] = useRecoilState(eventState)
+  const { eventState, setEvent, setEventField } = useEventStore()
+
+  useEffect(() => {
+    console.log('eventState', eventState)
+  }, [eventState])
+
   const [selectedEventSheetType, setSelectedEventSheetType] =
     useState('요일만 선택')
 
   const handleEventSheetTypeChange = (value: string) => {
     setSelectedEventSheetType(value)
-    setFormState((prev) => ({
-      ...prev,
-      eventSheetType:
-        value === '요일만 선택' ? 'RECURRING_WEEKDAYS' : 'SPECIFIC_DATES',
-    }))
+
+    if (value === '요일만 선택') {
+      setEventField('eventSheetType', 'RECURRING_WEEKDAYS')
+      setEventField('specificDates', [])
+    } else {
+      setEventField('eventSheetType', 'SPECIFIC_DATES')
+      setEventField('recurringWeekdays', [])
+    }
   }
 
   const handleDaySelectChange = (value: string[]) => {
-    setFormState((prev) => ({
-      ...prev,
-      recurringWeekdays: value,
-    }))
+    setEventField('recurringWeekdays', value)
   }
 
   const handleTimeRangeChange = (startTimeStr: string, endTimeStr: string) => {
-    setFormState((prev) => ({
-      ...prev,
-      startTime: timeStringToTime(startTimeStr),
-      endTime: timeStringToTime(endTimeStr),
-    }))
+    setEventField('startTime', startTimeStr)
+    setEventField('endTime', endTimeStr)
   }
 
   const handleDatePickerChange = (dates: {
     startDate: Date | null
     endDate: Date | null
   }) => {
-    setFormState((prev) => ({
-      ...prev,
-      startDate: dates.startDate,
-      endDate: dates.endDate,
-    }))
+    setEventField('specificDates', [
+      dates.startDate ? format(dates.startDate, 'yyyy-MM-dd') : '',
+      dates.endDate ? format(dates.endDate, 'yyyy-MM-dd') : '',
+    ])
   }
 
   const getFormattedApiPayload = () => {
-    if (formState.specificDate?.startDate && formState.specificDate?.endDate) {
-      return {
-        activeStartDateTime: format(
-          formState.specificDate.startDate,
-          "yyyy-MM-dd'T'HH:mm"
-        ),
-        activeEndDateTime: format(
-          formState.specificDate.endDate,
-          "yyyy-MM-dd'T'HH:mm"
-        ),
-        timeZone: formState.timeZone,
-      }
-    }
+    // if (formState.specificDate?.startDate && formState.specificDate?.endDate) {
+    //   return {
+    //     activeStartDateTime: format(
+    //       formState.specificDate.startDate,
+    //       "yyyy-MM-dd'T'HH:mm"
+    //     ),
+    //     activeEndDateTime: format(
+    //       formState.specificDate.endDate,
+    //       "yyyy-MM-dd'T'HH:mm"
+    //     ),
+    //     timeZone: formState.timeZone,
+    //   }
+    // }
+
     return null
   }
 

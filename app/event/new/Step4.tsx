@@ -1,93 +1,100 @@
-import { eventState } from '@/store/eventState'
 import { useEffect } from 'react'
-import { useRecoilState } from 'recoil'
-
 import {
-  BasicEventSheet,
+  // BasicEventSheet,
   SpecificDateEventSheet,
   RecurringWeekdaysEventSheet,
+  EventSheet,
 } from '@/types/eventSheet'
-import { useCreateEventSheetMutation } from '@/hooks/useCreateEventSheetMutation'
+// import { useCreateEventSheetMutation } from '@/hooks/useCreateEventSheetMutation'
 import { useSpecificDateEventSheetMutation } from '@/hooks/useSpecificDateEventSheetMutation'
 import { useRecurringWeekdaysEventSheetMutation } from '@/hooks/useRecurringWeekdaysEventSheetMutation'
+import { useEventStore } from '@/store/useEventStore'
+import { create } from 'domain'
 
 export default function Step4({ onNext }: { onNext: () => void }) {
-  const [formState] = useRecoilState(eventState)
+  const { eventState } = useEventStore()
 
   // 이벤트 생성 훅들
-  const createBasicMutation = useCreateEventSheetMutation()
+  // const createBasicMutation = useCreateEventSheetMutation()
   const createSpecificDateMutation = useSpecificDateEventSheetMutation()
   const createRecurringWeekdaysMutation =
     useRecurringWeekdaysEventSheetMutation()
 
+  const isPending =
+    createSpecificDateMutation.isPending ||
+    createRecurringWeekdaysMutation.isPending
+
   useEffect(() => {
-    if (!formState.eventName) return // 이벤트 이름이 없으면 실행 X
-
-    if (
-      formState.eventSheetType === 'SPECIFIC_DATES' &&
-      formState.specificDate
-    ) {
-      // 특정 날짜 기반 이벤트 생성
-      const payload: SpecificDateEventSheet = {
-        name: formState.eventName,
-        description: 'Event created via Step4',
-        eventSheetType: 'SPECIFIC_DATES',
-        timeZone: formState.timeZone,
-        pinCode: formState.pincode || '',
-        activeStartDateTime: formState.specificDate.startDate
-          ? new Date(formState.specificDate.startDate).toISOString()
-          : '',
-        activeEndDateTime: formState.specificDate.endDate
-          ? new Date(formState.specificDate.endDate).toISOString()
-          : '',
-        manualActive: false,
-        specificDates: [
-          formState.specificDate.startDate,
-          formState.specificDate.endDate,
-        ]
-          .filter((date): date is Date => date !== null) // null 제거
-          .map((date) => date.toISOString().split('T')[0]), // YYYY-MM-DD 변환
-        startTime: formState.startTime
-          ? `${formState.startTime.hours}:${formState.startTime.minutes}`
-          : '00:00',
-        endTime: formState.endTime
-          ? `${formState.endTime.hours}:${formState.endTime.minutes}`
-          : '23:59',
-      }
-      createSpecificDateMutation.mutate(payload)
-    } else if (formState.eventSheetType === 'RECURRING_WEEKDAYS') {
-      // 요일 반복 이벤트 생성
-      const payload: RecurringWeekdaysEventSheet = {
-        name: formState.eventName,
-        description: 'Event created via Step4',
-        eventSheetType: 'RECURRING_WEEKDAYS',
-        timeZone: formState.timeZone,
-        pinCode: formState.pincode || '',
-        activeStartDateTime: '',
-        activeEndDateTime: '',
-        manualActive: false,
-        recurringWeekdays: formState.recurringWeekdays, // ['Monday', 'Wednesday', 'Friday']
-        startTime: formState.startTime
-          ? `${formState.startTime.hours}:${formState.startTime.minutes}`
-          : '00:00',
-        endTime: formState.endTime
-          ? `${formState.endTime.hours}:${formState.endTime.minutes}`
-          : '23:59',
-      }
-      createRecurringWeekdaysMutation.mutate(payload)
+    const payload: EventSheet = {
+      name: eventState.name,
+      description: eventState.description,
+      eventSheetType: eventState.eventSheetType,
+      timeZone: eventState.timeZone,
+      pinCode: eventState.pinCode || '',
+      activeStartDateTime: eventState.activeStartDateTime,
+      activeEndDateTime: eventState.activeEndDateTime,
+      manualActive: false,
+      startTime: eventState.startTime,
+      endTime: eventState.endTime,
     }
+    if (eventState.eventSheetType === 'SPECIFIC_DATES') {
+      // 특정 날짜 기반 이벤트 생성
+      payload.specificDates = eventState.specificDates
+      createSpecificDateMutation.mutate(payload as SpecificDateEventSheet)
+    } else {
+      // 요일 반복 이벤트 생성
+      payload.recurringWeekdays = eventState.recurringWeekdays
+      createRecurringWeekdaysMutation.mutate(
+        payload as RecurringWeekdaysEventSheet
+      )
+    }
+  }, [])
 
-    console.log('Event Created!', formState)
-    alert('Event Created!')
-  }, [formState]) // formState가 변경될 때 실행
+  // 로딩 중일 때 표시할 내용
+  if (isPending) {
+    return (
+      <div style={{ textAlign: 'center', marginTop: '20px' }}>
+        <h2>Loading...</h2>
+        {/* 스피너를 추가하거나 원하는 스타일을 적용할 수 있습니다 */}
+        <div className="spinner"></div>
+      </div>
+    )
+  }
 
   return (
-    <div>
-      <h1>Event Created!</h1>
-      {/* 이벤트 정보 출력 */}
-      <div>
-        <h2>Event Info</h2>
-        <pre>{JSON.stringify(formState, null, 2)}</pre>
+    <div className="mt-25 w-full">
+      <h1 className="text-4xl font-bold">Event Created!</h1>
+      <div className="w-full flex gap-4 mt-8">
+        <div>
+          <h2>Event Info</h2>
+          <pre className="border border-blue-500 p-4">
+            {JSON.stringify(eventState, null, 2)}
+          </pre>
+        </div>
+
+        <div>
+          <h2>API Response</h2>
+          <pre className="border border-green-500 p-4">
+            {JSON.stringify(
+              createSpecificDateMutation.data ||
+                createRecurringWeekdaysMutation.data,
+              null,
+              2
+            )}
+          </pre>
+        </div>
+
+        <div>
+          <h2>API Error</h2>
+          <pre className="border border-red-500 p-4">
+            {JSON.stringify(
+              createSpecificDateMutation.error ||
+                createRecurringWeekdaysMutation.error,
+              null,
+              2
+            )}
+          </pre>
+        </div>
       </div>
     </div>
   )

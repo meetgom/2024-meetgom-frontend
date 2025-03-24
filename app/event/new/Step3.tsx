@@ -1,15 +1,15 @@
 import { useState } from 'react'
 import PinInput from '@/components/PinInput/PinInput'
-import { useRecoilState } from 'recoil'
-import { eventState } from '@/store/eventState'
+import { useEventStore } from '@/store/useEventStore'
 
 export default function Step3({ onNext }: { onNext: () => void }) {
+  const { eventState, setEvent, setEventField } = useEventStore()
+
   const [firstPin, setFirstPin] = useState<string | null>(null)
-  const [formState, setFormState] = useRecoilState(eventState)
 
   const handleFirstPinComplete = (pin: string) => {
     setFirstPin(pin) // 첫 번째 PIN 저장
-    setFormState((prev) => ({ ...prev, pincode: pin })) // Recoil 상태에 저장
+    setEventField('pinCode', pin) // Recoil 상태에 저장
   }
 
   const handleConfirmPinComplete = (pin: string) => {
