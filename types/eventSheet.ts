@@ -1,3 +1,5 @@
+export type EventSheetType = 'RECURRING_WEEKDAYS' | 'SPECIFIC_DATES'
+
 export interface EventSheetTimeSlot {
   date: string
   startTime: string
@@ -7,12 +9,16 @@ export interface EventSheetTimeSlot {
 export interface EventSheet {
   name: string
   description: string
-  eventSheetType: 'RECURRING_WEEKDAYS' | 'SPECIFIC_DATES'
+  eventSheetType: EventSheetType
   timeZone: string
   pinCode: string
   activeStartDateTime: string
   activeEndDateTime: string
   manualActive: boolean
+  startTime?: string
+  endTime?: string
+  recurringWeekdays?: string[]
+  specificDates?: string[]
 }
 
 export type BasicEventSheet = EventSheet & {
@@ -30,3 +36,7 @@ export type RecurringWeekdaysEventSheet = EventSheet & {
   startTime: string
   endTime: string
 }
+
+export type AllEventSheets =
+  | SpecificDateEventSheet
+  | RecurringWeekdaysEventSheet
