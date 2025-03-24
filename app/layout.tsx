@@ -3,8 +3,6 @@ import '../styles/globals.css'
 import Header from '../components/Header/Header'
 import ClientProviders from './ClientProviders'
 
-const inter = Inter({ subsets: ['latin'] })
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -12,7 +10,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-white`}>
+      <body>
         <ClientProviders>
           <div className="flex min-h-screen flex-col items-center">
             <Header />
