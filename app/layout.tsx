@@ -14,7 +14,7 @@ export default function RootLayout({
         <ClientProviders>
           <div className="flex min-h-screen flex-col items-center">
             <Header />
-            <div className="flex flex-col items-center justify-center w-full my-auto space-y-4 px-4 md:px-24 lg:px-48">
+            <div className="flex flex-col items-center justify-center w-full my-auto">
               {children}
             </div>
           </div>

@@ -29,7 +29,7 @@ export const Button = ({
   return (
     <button
       type="button"
-      className={`${backgroundColor} ${fontColor} border ${borderColor} ${sizeClasses[size]} leading-none inline-block hover:opacity-80 hover:shadow-sm duration-300`}
+      className={`${backgroundColor} ${fontColor} border ${borderColor} ${sizeClasses[size]} cursor-pointer leading-none inline-block hover:opacity-80 hover:shadow-sm duration-300`}
       onClick={onClick}
       {...props}
     >

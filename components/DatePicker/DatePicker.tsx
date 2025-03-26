@@ -110,7 +110,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           key={currentDate.toString()}
           className={`flex justify-center cursor-pointer p-2 ${
             isSelected
-              ? 'bg-green bg-opacity-10 text-green rounded-lg'
+              ? 'bg-blue-500 bg-opacity-10 text-white rounded-lg'
               : isCurrentMonth
                 ? 'bg-white text-black'
                 : 'bg-white text-gray-400'

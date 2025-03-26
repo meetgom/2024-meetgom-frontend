@@ -1,25 +1,19 @@
 import { Button } from '@/components/Button/Button'
 import { SelectBox } from '@/components/SelectBox/SelectBox'
 import { TextInputBox } from '@/components/TextInputBox/TextInputBox'
-import { eventState } from '@/store/eventState'
+import { useEventStore } from '@/store/useEventStore'
+import { EventSheet } from '@/types/eventSheet'
 import React from 'react'
-import { useRecoilState } from 'recoil'
 
 export default function Step1({ onNext }: { onNext: () => void }) {
-  const [formState, setFormState] = useRecoilState(eventState)
+  const { eventState, setEventField } = useEventStore()
 
   const handleEventNameChange = (value: string) => {
-    setFormState((prev) => ({
-      ...prev,
-      eventName: value,
-    }))
+    setEventField('name', value)
   }
 
   const handleTimeZoneChange = (value: string) => {
-    setFormState((prev) => ({
-      ...prev,
-      timeZone: value,
-    }))
+    setEventField('timeZone', value)
   }
 
   return (
