@@ -9,7 +9,7 @@ export default function Step3({ onNext }: { onNext: () => void }) {
 
   const handleFirstPinComplete = (pin: string) => {
     setFirstPin(pin) // 첫 번째 PIN 저장
-    setEventField('pinCode', pin) // Recoil 상태에 저장
+    setEventField('pinCode', pin) // 전역 상태에 저장
   }
 
   const handleConfirmPinComplete = (pin: string) => {

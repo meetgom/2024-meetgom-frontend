@@ -1,11 +1,9 @@
 import { useEffect } from 'react'
 import {
-  // BasicEventSheet,
   SpecificDateEventSheet,
   RecurringWeekdaysEventSheet,
   EventSheet,
 } from '@/types/eventSheet'
-// import { useCreateEventSheetMutation } from '@/hooks/useCreateEventSheetMutation'
 import { useSpecificDateEventSheetMutation } from '@/hooks/useSpecificDateEventSheetMutation'
 import { useRecurringWeekdaysEventSheetMutation } from '@/hooks/useRecurringWeekdaysEventSheetMutation'
 import { useEventStore } from '@/store/useEventStore'
@@ -14,8 +12,7 @@ import { create } from 'domain'
 export default function Step4({ onNext }: { onNext: () => void }) {
   const { eventState } = useEventStore()
 
-  // 이벤트 생성 훅들
-  // const createBasicMutation = useCreateEventSheetMutation()
+  // 이벤트 생성 훅
   const createSpecificDateMutation = useSpecificDateEventSheetMutation()
   const createRecurringWeekdaysMutation =
     useRecurringWeekdaysEventSheetMutation()
