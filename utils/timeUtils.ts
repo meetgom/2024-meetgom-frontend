@@ -1,4 +1,4 @@
-import { Time } from '@/types/Time'
+import { Time } from '@/types/time'
 
 export const timeStringToTime = (timeStr: string): Time => {
   const [hours, minutes] = timeStr.split(':').map(Number)
