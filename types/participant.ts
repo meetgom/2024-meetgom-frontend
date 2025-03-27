@@ -1,4 +1,4 @@
-import { TimeSlotTable } from './timeSlot'
+import { AvailableTimeSlot } from './timeSlot'
 
 /** EventSheet 참여자 */
 export interface Participant {
@@ -11,5 +11,5 @@ export interface Participant {
   }
   role: 'ADMIN'
   timeZone: string
-  availableTimeSlots: TimeSlotTable
+  availableTimeSlots: AvailableTimeSlot[]
 }
