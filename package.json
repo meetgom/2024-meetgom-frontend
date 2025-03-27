@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.69.0",
+    "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
     "fs-monkey": "^1.0.6",
     "hast-util-is-element": "^3.0.0",
@@ -21,6 +22,7 @@
     "qr-code-styling": "^1.6.0-rc.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "tailwind-merge": "^3.0.2",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
