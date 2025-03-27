@@ -1,3 +1,4 @@
+import { DayOfWeek } from '@/types/dayOfWeek'
 import { TimeSlot } from '@/types/timeSlot'
 import type { Meta, StoryObj } from '@storybook/react'
 import CalendarTooltip from './CalendarTooltip'
@@ -16,7 +17,7 @@ type Story = StoryObj<typeof CalendarTooltip>
 
 const defaultTimeSlot: TimeSlot = {
   date: '2024-03-21',
-  dayOfWeek: 'THURSDAY',
+  dayOfWeek: DayOfWeek.THURSDAY,
   startTime: '14:00',
   endTime: '15:00',
   availableParticipantsRatio: 70,
@@ -34,7 +35,7 @@ export const Hidden: Story = {
   args: {
     timeSlot: {
       date: '2024-03-21',
-      dayOfWeek: 'THURSDAY',
+      dayOfWeek: DayOfWeek.THURSDAY,
       startTime: '14:00',
       endTime: '15:00',
       availableParticipantsRatio: 70,
