@@ -1,10 +1,6 @@
-export type EventSheetType = 'RECURRING_WEEKDAYS' | 'SPECIFIC_DATES'
+import { EventSheetTimeSlot } from './timeSlot'
 
-export interface EventSheetTimeSlot {
-  date: string
-  startTime: string
-  endTime: string
-}
+export type EventSheetType = 'SPECIFIC_DATES' | 'RECURRING_WEEKDAYS'
 
 export interface EventSheet {
   name: string
