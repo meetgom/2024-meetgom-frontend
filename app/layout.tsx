@@ -1,13 +1,10 @@
-import { Inter } from 'next/font/google'
 import '../styles/globals.css'
 import Header from '../components/Header/Header'
 import ClientProviders from './ClientProviders'
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body>
