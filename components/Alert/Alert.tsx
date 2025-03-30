@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 
 interface AlertProps {
@@ -11,7 +12,7 @@ export const Alert: React.FC<AlertProps> = ({
   message = 'default alert message',
   backgroundColor = 'bg-black',
   visible,
-  icon = 'check.svg',
+  icon = '/images/check.svg',
 }) => {
   return (
     <div
@@ -19,8 +20,14 @@ export const Alert: React.FC<AlertProps> = ({
         visible ? 'opacity-100' : 'opacity-0'
       }`}
     >
-      <img className="mr-2" src={icon} alt="check icon" />
-      <div className="text-white">{message}</div>
+      <Image
+        className="mr-2"
+        src={icon}
+        alt="check icon"
+        width={24}
+        height={24}
+      />
+      <div className="text-white whitespace-nowrap">{message}</div>
     </div>
   )
 }

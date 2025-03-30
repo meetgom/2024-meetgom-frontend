@@ -1,14 +1,14 @@
-import React from 'react'
-
 interface TextInputBoxProps {
   title: string
   placeholder: string
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  value: string
+  onChange: (value: string) => void
 }
 
 export const TextInputBox = ({
   title,
   placeholder,
+  value = '',
   onChange,
   ...props
 }: TextInputBoxProps) => {
@@ -17,9 +17,12 @@ export const TextInputBox = ({
       <div className="text-sm text-[#959595] mb-1 ml-2">{title}</div>
       <input
         type="text"
-        className="bg-white text-black border border-[#EFEFEF] placeholder:text-black focus:outline-black rounded-md inline-block leading-none w-80 h-12 p-3"
+        className="bg-white text-black border border-[#EFEFEF] placeholder:text-black focus:outline-black rounded-md inline-block leading-none w-full h-12 p-3"
         placeholder={placeholder}
-        onChange={onChange}
+        value={value}
+        onChange={(e) => {
+          onChange(e.target.value)
+        }}
         {...props}
       />
     </div>
