@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 
 interface ButtonProps {
@@ -29,14 +30,12 @@ export const Button = ({
   return (
     <button
       type="button"
-      className={`${backgroundColor} ${fontColor} border ${borderColor} ${sizeClasses[size]} cursor-pointer leading-none inline-block hover:opacity-80 hover:shadow-sm duration-300`}
+      className={`${backgroundColor} ${fontColor} border ${borderColor} ${sizeClasses[size]} flex items-center justify-center gap-2 cursor-pointer hover:opacity-80 hover:shadow-sm duration-300`}
       onClick={onClick}
       {...props}
     >
-      <div className="flex justify-center whitespace-nowrap">
-        {icon && <img className="mr-2" src={icon} alt="" />}
-        {label}
-      </div>
+      {icon && <Image src={icon} alt="" width={20} height={20} />}
+      <div className="whitespace-nowrap">{label}</div>
     </button>
   )
 }
