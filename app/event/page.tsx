@@ -1,6 +1,7 @@
 'use client'
 
 import { Button } from '@/components/Button/Button'
+import Calendar from '@/components/Calendar/Calendar'
 import Checkbox from '@/components/CheckBox/CheckBox'
 import { Divider } from '@/components/Divider/Divider'
 import EventSaveBar from '@/components/EventSaveBar/EventSaveBar'
@@ -8,6 +9,7 @@ import { LinkBox } from '@/components/LinkBox/LinkBox'
 import TextBox from '@/components/TextBox/TextBox'
 import { TextInputBox } from '@/components/TextInputBox/TextInputBox'
 import TimeTextBox from '@/components/TimeTextBox/TimeTextBox'
+import { mockEventSheetData } from '@/mocks/eventSheetData'
 import { useState } from 'react'
 
 const EventPage = () => {
@@ -99,7 +101,10 @@ const EventPage = () => {
         {/* 테스트 버튼 */}
         <Button label="테스트 버튼" onClick={handleTest} size="md" />
       </div>
-      <div className="border border-blue-500 w-full">Right</div>
+      <Calendar
+        eventSheetTimeSlots={mockEventSheetData.data.eventSheetTimeSlots}
+        timeSlotTable={mockEventSheetData.data.timeSlotTable}
+      />
 
       {/* 저장 바 */}
       {isChanged && (
