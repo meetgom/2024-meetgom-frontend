@@ -1,4 +1,5 @@
 import { DayOfWeek, dayOfWeekMap } from '@/types/dayOfWeek'
+import { format } from 'date-fns'
 
 /**
  * @description 요일을 표시
@@ -48,4 +49,14 @@ export const formatDateToString = (date: Date): string => {
  */
 export const parseStringToDate = (dateString: string): Date => {
   return new Date(dateString)
+}
+
+/**
+ * @description 날짜를 요일로 파싱
+ * @param date 날짜
+ * @returns 요일
+ */
+export const parseDateToDayOfWeek = (date: Date): DayOfWeek => {
+  const day = format(date, 'EEEE').toUpperCase()
+  return DayOfWeek[day as keyof typeof DayOfWeek]
 }
