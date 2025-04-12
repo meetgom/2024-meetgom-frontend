@@ -4,22 +4,15 @@ import { Button } from './Button'
 const meta = {
   title: 'Shared/Button',
   component: Button,
-  parameters: {
-    layout: 'centered',
-  },
+  parameters: { layout: 'centered' },
   tags: ['autodocs'],
   argTypes: {
-    backgroundColor: { control: 'color' },
-    fontColor: { control: 'color' },
-    borderColor: { control: 'color' },
+    backgroundColor: { control: 'text' },
+    fontColor: { control: 'text' },
+    borderColor: { control: 'text' },
     label: { control: 'text' },
     onClick: { action: 'clicked' },
-    size: {
-      control: {
-        type: 'select',
-        options: ['sm', 'md', 'lg'],
-      },
-    },
+    size: { control: { type: 'select', options: ['sm', 'md', 'lg'] } },
     icon: { control: 'text' },
   },
 } satisfies Meta<typeof Button>
@@ -76,7 +69,7 @@ export const MediumButtonSaveImage: Story = {
       alert('Clicked!')
     },
     size: 'md',
-    icon: 'download.svg',
+    icon: '/images/download.svg',
   },
 }
 
@@ -90,7 +83,7 @@ export const MediumButtonShareImage: Story = {
       alert('Clicked!')
     },
     size: 'md',
-    icon: 'share.svg',
+    icon: '/images/share.svg',
   },
 }
 

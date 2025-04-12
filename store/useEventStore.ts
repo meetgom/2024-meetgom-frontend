@@ -8,7 +8,7 @@ interface EventState {
 }
 
 const initialState: EventSheet = {
-  name: '제목없는 이벤트',
+  name: '',
   description: '',
   eventSheetType: 'RECURRING_WEEKDAYS',
   timeZone: 'Asia/Seoul',

@@ -2,7 +2,6 @@ import { Button } from '@/components/Button/Button'
 import { SelectBox } from '@/components/SelectBox/SelectBox'
 import { TextInputBox } from '@/components/TextInputBox/TextInputBox'
 import { useEventStore } from '@/store/useEventStore'
-import { EventSheet } from '@/types/eventSheet'
 import React from 'react'
 
 export default function Step1({ onNext }: { onNext: () => void }) {
@@ -21,7 +20,8 @@ export default function Step1({ onNext }: { onNext: () => void }) {
       <TextInputBox
         title="이벤트 시트 이름"
         placeholder="제목없는 이벤트"
-        onChange={(e) => handleEventNameChange(e.target.value)}
+        value={eventState.name}
+        onChange={handleEventNameChange}
       />
       <div className="h-6" />
       <SelectBox
