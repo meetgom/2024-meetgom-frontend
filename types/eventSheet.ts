@@ -1,4 +1,4 @@
-import { EventSheetTimeSlot } from './timeSlot'
+import { BaseTimeSlot } from './timeSlot'
 
 export type EventSheetType = 'SPECIFIC_DATES' | 'RECURRING_WEEKDAYS'
 
@@ -18,7 +18,7 @@ export interface EventSheet {
 }
 
 export type BasicEventSheet = EventSheet & {
-  eventSheetTimeSlots: EventSheetTimeSlot[]
+  eventSheetTimeSlots: BaseTimeSlot[]
 }
 
 export type SpecificDateEventSheet = EventSheet & {
